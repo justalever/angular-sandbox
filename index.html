@@ -1,0 +1,49 @@
+<!doctype html>
+<html class="no-js" lang="" ng-app>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Angular JS Exploration</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+
+    <style>
+    .red { color: red; }
+    .navy { color: navy; }
+    </style>
+</head>
+<body ng-init="customers=[
+    {joined:'2000-12-02', name:'John', city:'Chandler', orderTotal: 9.9956 },
+    {joined:'1965-01-25', name:'Zed', city:'Las Vegas', orderTotal: 19.99 },
+    {joined:'1944-06-15', name:'Tina', city:'New York', orderTotal: 44.99 },
+    {joined:'1995-03-28', name:'Dave', city:'Seattle', orderTotal: 101.5 },
+    ]">
+<div class="container">
+    <h3>Customers</h3>
+    Filter: <input type="text" ng-model="customerFilter.name"/>
+    <br />
+    <table class="table">
+        <tr>
+            <th ng-click="sortBy='name'; reverse=!reverse">Name</th>
+            <th ng-click="sortBy='city'; reverse=!reverse">City</th>
+            <th ng-click="sortBy='orderTotal'; reverse=!reverse">Order Total</th>
+            <th ng-click="sortBy='joined'; reverse=!reverse">Joined</th>
+        </tr>
+        <tr ng-repeat="cust in customers | filter:customerFilter | orderBy:sortBy:reverse">
+            <td>{{ cust.name | uppercase }}</td>
+            <td>{{ cust.city | lowercase }}</td>
+            <td>{{ cust.orderTotal | currency }}</td>
+            <td>{{ cust.joined | date }}</td>
+        </tr>
+    </table>
+</div>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
